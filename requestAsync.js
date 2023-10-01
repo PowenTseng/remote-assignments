@@ -42,6 +42,9 @@ async function requestAsyncAwait(url) {
   }
 }
 
+console.time("Total execution time for requestAsync.js");
 requestCallback(url, console.log); // would print out the execution time
 requestPromise(url).then(console.log);
-requestAsyncAwait(url);
+requestAsyncAwait(url).then(() => {
+  console.timeEnd("Total execution time for requestAsync.js");
+});

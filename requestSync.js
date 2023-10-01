@@ -1,4 +1,3 @@
-// requestSync.js
 const request = require("sync-request");
 
 const url =
@@ -15,6 +14,8 @@ function requestSync(url) {
     console.error("Error:", error.message);
   }
 }
+console.time("Total execution time for requestSync.js");
 requestSync(url); // would print out the execution time
 requestSync(url);
 requestSync(url);
+console.timeEnd("Total execution time for requestSync.js");
