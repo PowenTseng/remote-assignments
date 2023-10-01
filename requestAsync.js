@@ -10,10 +10,11 @@ function requestCallback(url, callback) {
     .get(url)
     .then((response) => {
       const end = Date.now();
-      callback(`Execution time: ${end - start}ms`);
+      callback(null, `Execution time: ${end - start}ms`);
     })
     .catch((error) => {
       console.error("Error:", error.message);
+      callback(error);
     });
 }
 
@@ -36,15 +37,35 @@ async function requestAsyncAwait(url) {
   // you should call requestPromise here and get the result using async/await.
   try {
     const result = await requestPromise(url);
-    console.log(result);
+    return result;
   } catch (error) {
     console.error("Error:", error.message);
   }
 }
 
+let completedRequests = 0;
+const totalRequests = 3;
+
+function checkAllRequestsCompleted() {
+  completedRequests++;
+  if (completedRequests === totalRequests) {
+    console.timeEnd("Total execution time for requestAsync.js");
+  }
+}
+
 console.time("Total execution time for requestAsync.js");
-requestCallback(url, console.log); // would print out the execution time
-requestPromise(url).then(console.log);
-requestAsyncAwait(url).then(() => {
-  console.timeEnd("Total execution time for requestAsync.js");
+requestCallback(url, (error, result) => {
+  if (error) return;
+  console.log(result);
+  checkAllRequestsCompleted();
+});
+
+requestPromise(url).then((result) => {
+  console.log(result);
+  checkAllRequestsCompleted();
+});
+
+requestAsyncAwait(url).then((result) => {
+  console.log(result);
+  checkAllRequestsCompleted();
 });
