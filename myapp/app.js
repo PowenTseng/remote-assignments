@@ -3,7 +3,6 @@ const mysql = require("mysql2/promise");
 const app = express();
 const PORT = 3000;
 require("dotenv").config();
-
 app.use(express.json());
 
 // Create a MySQL connection pool
