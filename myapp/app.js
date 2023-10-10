@@ -64,7 +64,7 @@ app.post("/users", async (req, res) => {
           name,
           email,
         },
-        "request-date": new Date().toUTCString(),
+        "request-date": req.get("Request-Date"),
       },
     });
   } catch (error) {
