@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql2/promise");
 const app = express();
 const PORT = 3000;
+
 require("dotenv").config();
 app.use(express.json());
 
@@ -63,7 +64,7 @@ app.post("/users", async (req, res) => {
           name,
           email,
         },
-        "request-date": new Date().toUTCString(),
+        "request-date": req.get("Request-Date"),
       },
     });
   } catch (error) {
@@ -101,7 +102,7 @@ app.get("/users", async (req, res) => {
           name: user.name,
           email: user.email,
         },
-        "request-date": new Date().toUTCString(),
+        "request-date": req.get("Request-Date"),
       },
     });
   } catch (error) {
