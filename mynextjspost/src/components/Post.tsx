@@ -6,6 +6,7 @@ interface PostProps {
   initialLikes: number;
 }
 
+
 const Post: React.FC<PostProps> = ({ content, initialLikes }) => {
   const [likes, setLikes] = useState(initialLikes);
 
