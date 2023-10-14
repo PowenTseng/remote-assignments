@@ -39,7 +39,6 @@ const StyledThumbsUp = styled(FaThumbsUp)`
 
 function App() {
   const [likes, setLikes] = useState(mockPosts.map((post) => post.likes));
-
   const toggleLike = (index) => {
     setLikes((prevLikes) => {
       const newLikes = [...prevLikes];
